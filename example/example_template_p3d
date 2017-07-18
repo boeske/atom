@@ -1,0 +1,104 @@
+ &inipar 
+
+ !!! Numerical Grid
+         nx = <nx>, 
+         ny = <ny>, 
+         nz = <nz>,
+
+         dx = <dx>, 
+         dy = <dy>, 
+         dz = <dz>,
+
+
+ !!! Pressure solver
+         psolver        = 'multigrid',
+         cycle_mg       = 'v',
+         mg_cycles      = 2,
+         mg_switch_to_pe0_level = -1,
+
+
+ !!! Initialization
+         initializing_actions  = 'cyclic_fill',
+         turbulent_inflow      = .T.,
+         recycling_width       = 3000.0,
+         inflow_damping_height = 2000.0,
+
+
+ !!! Physics
+         neutral = .T.,
+
+         ug_surface = 14.34,
+         vg_surface = -4.39,
+
+         roughness_length = 0.2,
+
+         phi = 42.,
+
+
+ !!! Misc
+         conserve_volume_flow = .F.,
+
+
+ !!! Boundary conditions
+         bc_lr            = 'dirichlet/radiation',
+         bc_uv_t          = 'neumann',
+
+ !!! Topography
+         topography = 'read_from_file',
+         /
+
+
+ &d3par  
+
+ !!! End / restart times
+         end_time       = 25200.0,         !  7h
+         termination_time_needed = 3600.0,        
+
+
+  !!! Processor topology
+         npex = <npex>,
+         npey = <npey>,
+
+
+ !!! Disturbances
+         create_disturbances      = .F.,
+
+
+ !!! Data output (general)
+         dt_run_control = 0.0,
+
+         data_output = 'u_xy', 'v_xy', 'w_xy', 'u_xy_av', 'v_xy_av', 'w_xy_av',
+                       'u_xz', 'v_xz', 'w_xz', 'u_xz_av', 'v_xz_av', 'w_xz_av',
+                       'u_yz', 'v_yz', 'w_yz', 'u_yz_av', 'v_yz_av', 'w_yz_av',
+
+         data_output_pr = 'u', 'v', 'w',
+
+         section_xy = 1,2,3,4,5,6,7,8,9,10,11,
+         section_xz = <wka_y>,
+
+         do2d_at_begin = .F.,
+         data_output_2d_on_each_pe = .F.,
+
+         dt_data_output = 0.01,  
+         dt_do2d_yz     = 3600.0, 
+         dt_do2d_xz     = 3600.0,
+         dt_do2d_xy     = 3600.0,
+ 
+         dt_data_output_av  = 3600.0,
+         averaging_interval = 3600.0,
+
+         averaging_interval_pr = 0.0,
+         dt_averaging_input = 0.0,
+         netcdf_data_format = 5,
+         /
+
+ &userpar
+         data_output_user = 'u_tf_xy',    'v_tf_xy',    'w_tf_xy', 
+                            'u_tf_xy_av', 'v_tf_xy_av', 'w_tf_xy_av',
+
+         do_wind_turbines = .T.,
+         n_turbines = <n_turbines>, 
+
+         wka_x = <wka_x>, 
+         wka_y = <wka_y>, 
+         /
