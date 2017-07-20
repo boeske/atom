@@ -10,8 +10,9 @@ Version 2.0
 # ------------------------------------------------------------------------------
 
 # ATOM variables and functions
-from source.conf import *
+
 from source.messages import *
+from source.conf import *
 from source.functions import *
 from source.plot import *
 
@@ -39,7 +40,7 @@ import pprint
 # ------------------------------------------------------------------------------
 #                               Start ATOM
 # ------------------------------------------------------------------------------
-startmessage()
+
 
 # Create output directory
 if not os.path.exists(output_dir):

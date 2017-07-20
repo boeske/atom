@@ -3,6 +3,8 @@ ATOM: Terminal color messages
 Version 2.0
 """
 
+import sys
+
 
 class tc:
     RED = '\033[91m'
@@ -51,6 +53,7 @@ def message_error(string):
     print(tc.FAIL + "---------------------------------------")
     print(tc.BOLD + "### " + string + tc.ENDC)
     print(tc.FAIL + "---------------------------------------" + tc.ENDC)
+    sys.exit()
 
 
 def message_ok(string):
@@ -62,13 +65,16 @@ def message_ok(string):
 
 def startmessage():
     print(",--------------------------------------,")
-    print("| " + tc.BOLD + tc.OKBLUE + "              ATOM 1.9      " + tc.ENDC + "         |")
+    print("| " + tc.BOLD + tc.OKBLUE + "              ATOM 2.0      " + tc.ENDC + "         |")
     print("|--------------------------------------|")
-    print("| " + tc.OKGREEN + "   The " +
+    print("| " + tc.OKGREEN + "  The " +
           tc.BOLD + tc.OKBLUE + "A" +
-          tc.ENDC + tc.OKGREEN + "ssiSt " +
+          tc.ENDC + tc.OKGREEN + "lmighty " +
           tc.BOLD + tc.OKBLUE + "TO" +
           tc.ENDC + tc.OKGREEN + "pography " +
           tc.BOLD + tc.OKBLUE + "M" +
-          tc.ENDC + tc.OKGREEN + "odifier   " + tc.ENDC + " |")
+          tc.ENDC + tc.OKGREEN + "odifier  " + tc.ENDC + " |")
     print("'--------------------------------------'")
+
+
+startmessage()

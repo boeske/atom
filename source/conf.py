@@ -7,13 +7,19 @@ Version 2.0
 
 import numpy as np
 import configparser
+from source.messages import *
+import os.path
+import sys
 
 # ------------------------------------------------------------------------------
 #                               ConfigParser
 # ------------------------------------------------------------------------------
 
 config = configparser.ConfigParser()
-config.read("atom.ini")
+if os.path.exists("atom.ini"):
+    config.read("atom.ini")
+else:
+    message_error("Error: atom.ini not found!")
 
 # Get case name and set output directory
 case_name = config.get("Name", "case_name")
