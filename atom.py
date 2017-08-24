@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 ATOM - the Almighty TOpography Modifier
 Version 2.0
