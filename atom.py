@@ -736,7 +736,7 @@ print("     y: " + str(zz[1]))
 # Cut out topography
 message_info("Cut out")
 
-topo["cropped"]["data"] = topo["rotated"]["data"][y0_cut:ymax_cut, x0_cut:xmax_cut]
+topo["cropped"]["data"] = topo["rotated"]["data"][y0_cut:ymax_cut + ny_cyclic, x0_cut:xmax_cut]
 topo["cropped"]["dx"] = dx
 topo["cropped"]["nx"] = topo["cropped"]["data"].shape[1]
 topo["cropped"]["ny"] = topo["cropped"]["data"].shape[0]
@@ -887,8 +887,13 @@ message_info("Make topography periodic in y-direction")
 for i in range(nx_inflow, nx_inflow + nx_crop):
     for j in range(0, ny_cyclic):
         fac = float(j) / ny_cyclic
-        topo["PALM"]["data"][j, i] = (1.0 - fac) * topo["PALM"]["data"][j + ny_tmp - ny_cyclic, i] + fac * topo["PALM"]["data"][j, i]
+        topo["PALM"]["data"][j, i] = (1.0 - fac) * topo["PALM"]["data"][j + ny_tmp, i] + fac * topo["PALM"]["data"][j, i]
 message_done()
+
+# Remove topography at north boundary, not needed after creating cyclic transition
+topo["PALM"]["data"] = topo["PALM"]["data"][0:ny_tmp, :]
+topo["PALM"]["ny"] = topo["cropped"]["ny"] - ny_cyclic
+topo["PALM"]["Ly"] = topo["PALM"]["ny"] * topo["PALM"]["dx"]
 
 # Plot the topography for usage in PALM, lowest point NOT set to zero yet
 if plotting:
